@@ -1,7 +1,11 @@
 package org.example;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
         String hello = "Hello";
         Class helloClass = hello.getClass();
 
@@ -17,5 +21,18 @@ public class Main {
         Class<?> stringClass2 = Class.forName(className);
 
         System.out.println("Hello world!");
+
+        Class<?> personClass = Person.class;
+        Field[] fields = personClass.getFields();
+        Field[] decFields = personClass.getDeclaredFields();
+
+        Method setNameMethod = personClass.getMethod("setName", String.class);
+
+        Method[] decMethods = personClass.getDeclaredMethods();
+        Method[] methods = personClass.getMethods();
+
+        Constructor<?> constructor = personClass.getConstructor();
+        Constructor<?>[] decConstructors = personClass.getDeclaredConstructors();
+        Constructor<?>[] constructors = personClass.getConstructors();
     }
 }
