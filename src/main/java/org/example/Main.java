@@ -1,11 +1,14 @@
 package org.example;
 
+import org.example.model.Person;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException {
         String hello = "Hello";
         Class helloClass = hello.getClass();
 
@@ -34,5 +37,10 @@ public class Main {
         Constructor<?> constructor = personClass.getConstructor();
         Constructor<?>[] decConstructors = personClass.getDeclaredConstructors();
         Constructor<?>[] constructors = personClass.getConstructors();
+
+        Field nameField = personClass.getField("name");
+        int modifiers = nameField.getModifiers();
+        //boolean isPublic = modifiers & 0x00000001;
+        boolean isPublic = Modifier.isPublic(modifiers);
     }
 }
