@@ -17,5 +17,9 @@ public class PlayWithMetamodel {
 
         System.out.println("Primary key name = " + primaryKeyField.getName() + ", type = " + primaryKeyField.getType().getSimpleName());
 
+        for (ColumnField columnField : columnFields) {
+            System.out.println("Column name = " + columnField.getName() + ", type = " + columnField.getType().getSimpleName());
+        }
+
     }
 }
