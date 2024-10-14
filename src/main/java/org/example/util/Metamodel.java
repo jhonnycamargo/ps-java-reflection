@@ -6,15 +6,17 @@ import org.example.annotation.PrimaryKey;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class Metamodel<T> {
-    private final Class<T> clss;
+public class Metamodel {
+    private final Class<?> clss;
 
-    public static <T> Metamodel<T> of(Class<T> clss) {
-        return new Metamodel<>(clss);
+    public static Metamodel of(Class<?> clss) {
+        return new Metamodel(clss);
     }
 
-    public Metamodel(Class<T> clss) {
+    public Metamodel(Class<?> clss) {
         this.clss = clss;
     }
 
@@ -43,5 +45,25 @@ public class Metamodel<T> {
             }
         }
         return columnFields;
+    }
+
+    public String buildInsertRequest() {
+        String columnElement = buildColumnNames();
+
+        String questionMarksElements = buildQuestionMarksElement();
+
+        return "insert into " + this.clss.getSimpleName() + " (" + columnElement + ") values (" + questionMarksElements + ")";
+    }
+
+    private String buildQuestionMarksElement() {
+        int numberOfColumns = getColumns().size() + 1;
+        return IntStream.range(0, numberOfColumns).mapToObj(i -> "?").collect(Collectors.joining(", "));
+    }
+
+    private String buildColumnNames() {
+        String primaryKeyColumnName = getPrimaryKey().getName();
+        var columnNames = getColumns().stream().map(ColumnField::getName).toList();
+        columnNames.addFirst(primaryKeyColumnName);
+        return String.join(", ", columnNames);
     }
 }
