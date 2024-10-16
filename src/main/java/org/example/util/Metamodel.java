@@ -62,7 +62,7 @@ public class Metamodel {
 
     private String buildColumnNames() {
         String primaryKeyColumnName = getPrimaryKey().getName();
-        var columnNames = getColumns().stream().map(ColumnField::getName).toList();
+        var columnNames = getColumns().stream().map(ColumnField::getName).collect(Collectors.toList());
         columnNames.addFirst(primaryKeyColumnName);
         return String.join(", ", columnNames);
     }

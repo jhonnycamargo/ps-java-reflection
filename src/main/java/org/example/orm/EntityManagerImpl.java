@@ -24,7 +24,7 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
     }
 
     private PreparedStatementWrapper prepareStatementWith(String sql) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:~/Development/Study/Pluralsight/ps-java-reflection/db-flies/", "sa", "");
+        Connection connection = DriverManager.getConnection("jdbc:h2:~/Development/Study/Pluralsight/ps-java-reflection/db-flies/db-pluralsight", "sa", "");
         PreparedStatement statement = connection.prepareStatement(sql);
         return new PreparedStatementWrapper(statement);
     }
@@ -40,7 +40,11 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
             Metamodel metamodel = Metamodel.of(t.getClass());
             Class<?> primaryKeyTyp = metamodel.getPrimaryKey().getType();
             if (primaryKeyTyp == long.class) {
-                statement.setLong(1, idGenerator.incrementAndGet());
+                long id = idGenerator.incrementAndGet();
+                statement.setLong(1, id);
+                Field field = metamodel.getPrimaryKey().getField();
+                field.setAccessible(true);
+                field.set(t, id);
             }
 
             for (int columnIndex = 0; columnIndex < metamodel.getColumns().size(); columnIndex++) {
