@@ -4,6 +4,7 @@ import org.example.util.ColumnField;
 import org.example.util.Metamodel;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -27,6 +28,21 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
         PreparedStatement statement = prepareStatementWith(sql).andPrimaryKey(primaryKey);
         ResultSet resultSet = statement.executeQuery();
         return buildInstanceFrom(clss, resultSet);
+    }
+
+    private T buildInstanceFrom(Class<T> clss, ResultSet resultSet) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException {
+        Metamodel metamodel = Metamodel.of(clss);
+       T t = clss.getConstructor().newInstance();
+       Field primaryKeyField = metamodel.getPrimaryKey().getField();
+       String primaryKeyColumnName = metamodel.getPrimaryKey().getName();
+        Class<?> primaryKeyType = primaryKeyField.getType();
+
+        resultSet.next();
+        if (primaryKeyType == long.class) {
+            long primaryKey = resultSet.getInt(primaryKeyColumnName);
+            primaryKeyField.setAccessible(true);
+            primaryKeyField.set(t, primaryKey);
+        }
     }
 
     private PreparedStatementWrapper prepareStatementWith(String sql) throws SQLException {
