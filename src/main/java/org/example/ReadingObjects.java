@@ -4,7 +4,7 @@ import org.example.model.Person;
 import org.example.orm.EntityManager;
 
 public class ReadingObjects {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         EntityManager<Person> entityManager = EntityManager.of(Person.class);
 
@@ -12,5 +12,11 @@ public class ReadingObjects {
         Person james = entityManager.find(Person.class, 2L);
         Person susan = entityManager.find(Person.class, 3L);
         Person john = entityManager.find(Person.class, 4L);
+
+
+        System.out.println(linda);
+        System.out.println(james);
+        System.out.println(susan);
+        System.out.println(john);
     }
 }

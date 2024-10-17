@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class EntityManagerImpl<T> implements EntityManager<T> {
+public abstract class AbstractEntityManager<T> implements EntityManager<T> {
 
     private AtomicLong idGenerator = new AtomicLong(0L);
 
@@ -16,8 +16,9 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
     public void persist(T t) throws SQLException, IllegalAccessException {
         Metamodel metamodel = Metamodel.of(t.getClass());
         String sql = metamodel.buildInsertRequest();
-        PreparedStatement statement = prepareStatementWith(sql).andParameters(t);
-        statement.executeUpdate();
+        try (PreparedStatement statement = prepareStatementWith(sql).andParameters(t)) {
+            statement.executeUpdate();
+        }
 
     }
 
@@ -25,9 +26,11 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
     public T find(Class<T> clss, Object primaryKey) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Metamodel metamodel = Metamodel.of(clss);
         String sql = metamodel.buildSelectRequest();
-        PreparedStatement statement = prepareStatementWith(sql).andPrimaryKey(primaryKey);
-        ResultSet resultSet = statement.executeQuery();
-        return buildInstanceFrom(clss, resultSet);
+
+        try (PreparedStatement statement = prepareStatementWith(sql).andPrimaryKey(primaryKey);
+             ResultSet resultSet = statement.executeQuery();) {
+            return buildInstanceFrom(clss, resultSet);
+        }
     }
 
     private T buildInstanceFrom(Class<T> clss, ResultSet resultSet) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException {
@@ -62,10 +65,12 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
     }
 
     private PreparedStatementWrapper prepareStatementWith(String sql) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:h2:~/Development/Study/Pluralsight/ps-java-reflection/db-flies/db-pluralsight", "sa", "");
+        Connection connection = buildConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         return new PreparedStatementWrapper(statement);
     }
+
+    public abstract Connection buildConnection() throws SQLException;
 
     private class PreparedStatementWrapper {
         private final PreparedStatement statement;
