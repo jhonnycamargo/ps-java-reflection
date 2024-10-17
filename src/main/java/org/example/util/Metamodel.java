@@ -60,6 +60,11 @@ public class Metamodel {
         return IntStream.range(0, numberOfColumns).mapToObj(i -> "?").collect(Collectors.joining(", "));
     }
 
+    public String buildSelectRequest() {
+        String columnElement = buildColumnNames();
+        return "select " + columnElement + " from " + this.clss.getSimpleName() + " where " + getPrimaryKey().getName() + " = ?";
+    }
+
     private String buildColumnNames() {
         String primaryKeyColumnName = getPrimaryKey().getName();
         var columnNames = getColumns().stream().map(ColumnField::getName).collect(Collectors.toList());
