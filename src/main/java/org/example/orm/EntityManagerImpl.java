@@ -4,10 +4,7 @@ import org.example.util.ColumnField;
 import org.example.util.Metamodel;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class EntityManagerImpl<T> implements EntityManager<T> {
@@ -23,6 +20,15 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
 
     }
 
+    @Override
+    public T find(Class<T> clss, Object primaryKey) throws SQLException {
+        Metamodel metamodel = Metamodel.of(clss);
+        String sql = metamodel.buildSelectRequest();
+        PreparedStatement statement = prepareStatementWith(sql).andPrimaryKey(primaryKey);
+        ResultSet resultSet = statement.executeQuery();
+        return buildInstanceFrom(clss, resultSet);
+    }
+
     private PreparedStatementWrapper prepareStatementWith(String sql) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:h2:~/Development/Study/Pluralsight/ps-java-reflection/db-flies/db-pluralsight", "sa", "");
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -34,6 +40,13 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
 
         public PreparedStatementWrapper(PreparedStatement statement) {
             this.statement = statement;
+        }
+
+        public PreparedStatement andPrimaryKey(Object primaryKey) throws SQLException {
+            if (primaryKey.getClass() == Long.class) {
+                statement.setLong(1, (Long) primaryKey);
+            }
+            return statement;
         }
 
         public PreparedStatement andParameters(T t) throws SQLException, IllegalAccessException {
