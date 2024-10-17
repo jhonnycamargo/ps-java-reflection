@@ -22,7 +22,7 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
     }
 
     @Override
-    public T find(Class<T> clss, Object primaryKey) throws SQLException {
+    public T find(Class<T> clss, Object primaryKey) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Metamodel metamodel = Metamodel.of(clss);
         String sql = metamodel.buildSelectRequest();
         PreparedStatement statement = prepareStatementWith(sql).andPrimaryKey(primaryKey);
@@ -43,6 +43,22 @@ public class EntityManagerImpl<T> implements EntityManager<T> {
             primaryKeyField.setAccessible(true);
             primaryKeyField.set(t, primaryKey);
         }
+
+        for (ColumnField columnField : metamodel.getColumns()) {
+            Field field = columnField.getField();
+            field.setAccessible(true);
+            Class<?> columnType = columnField.getType();
+            String columnName = columnField.getName();
+            if (columnType == int.class) {
+                int value = resultSet.getInt(columnName);
+                field.set(t, value);
+            } else if (columnType == String.class) {
+                String value = resultSet.getString(columnName);
+                field.set(t, value);
+            }
+        }
+
+        return t;
     }
 
     private PreparedStatementWrapper prepareStatementWith(String sql) throws SQLException {
