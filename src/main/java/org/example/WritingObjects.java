@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.beanmanager.BeanManager;
 import org.example.model.Person;
 import org.example.orm.EntityManager;
 
@@ -8,7 +9,9 @@ import java.util.Arrays;
 
 public class WritingObjects {
     public static void main(String[] args) throws SQLException, IllegalAccessException {
-        EntityManager<Person> entityManager = EntityManager.of(Person.class);
+        BeanManager beanManager = BeanManager.getInstance();
+        EntityManager<Person> entityManager = beanManager.getInstance(EntityManager.class);
+
         Person linda = new Person("Linda", 31);
         Person james = new Person("James", 24);
         Person susan = new Person("Susan", 34);

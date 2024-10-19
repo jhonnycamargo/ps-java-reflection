@@ -1,10 +1,10 @@
 package org.example.beanmanager;
 
-import jdk.internal.access.JavaSecurityAccess;
+import org.example.annotation.Inject;
 import org.example.annotation.Provides;
-import org.example.orm.EntityManager;
 import org.example.provider.H2ConnectionProvider;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -55,7 +55,23 @@ public class BeanManager {
         }
     }
 
-    public <T> EntityManager<T> getInstance(Class<T> clss) {
-        return null;
+    public <T> T getInstance(Class<T> clss) {
+        try {
+            T t = clss.getConstructor().newInstance();
+            Field[] fields = clss.getDeclaredFields();
+            for (Field field : fields) {
+                Inject inject = field.getAnnotation(Inject.class);
+                if (inject != null) {
+                    Class<?> injectedFieldType = field.getType();
+                    Supplier<?> supplier = registry.get(injectedFieldType);
+                    Object objectToInject = supplier.get();
+                    field.setAccessible(true);
+                    field.set(t, objectToInject);
+                }
+            }
+            return t;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
