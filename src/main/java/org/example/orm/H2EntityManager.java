@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class H2EntityManager<T> extends AbstractEntityManager<T> {
+public class H2EntityManager<T> extends ManagedEntityManager<T> {
 
 
     public Connection buildConnection() throws SQLException {
