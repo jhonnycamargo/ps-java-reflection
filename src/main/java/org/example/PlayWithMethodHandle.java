@@ -34,5 +34,10 @@ public class PlayWithMethodHandle {
 
         nameSetter.invoke(person2, "Linda");
         System.out.println(person2);
+
+        Lookup privateLookup = MethodHandles.privateLookupIn(Person.class, lookup);
+        MethodHandle nameReader = privateLookup.findGetter(Person.class, "name", String.class);
+        String name2 = (String) nameReader.invoke(person2);
+        System.out.println(name2);
     }
 }
