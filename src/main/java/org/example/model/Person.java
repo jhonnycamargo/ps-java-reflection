@@ -33,6 +33,7 @@ public class Person {
     }
 
     public String getName() {
+        System.out.println("Get name invoked");
         return name;
     }
 
