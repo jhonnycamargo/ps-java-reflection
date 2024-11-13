@@ -15,6 +15,14 @@ public class MyClass {
         this.description = description;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
