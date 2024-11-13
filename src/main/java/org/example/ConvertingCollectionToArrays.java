@@ -14,6 +14,10 @@ public class ConvertingCollectionToArrays {
         list.add(new MyClass("v3", "abc"));
 
         Object[] objArray = list.toArray();
+        for (int i = 0; i < objArray.length; i++) {
+            System.out.println(objArray[i]);
+        }
+
         MyClass[] a1 = list.toArray(new MyClass[0]);
         MyClass[] a2 = new MyClass[3];
         MyClass[] a3 = list.toArray(a2);
