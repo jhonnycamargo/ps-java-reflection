@@ -2,7 +2,7 @@ package org.example.model;
 
 import java.util.Objects;
 
-public class MyClass {
+public class MyClass implements Comparable<MyClass> {
 
     private String name;
     private String description;
@@ -15,16 +15,32 @@ public class MyClass {
         this.description = description;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MyClass myClass = (MyClass) o;
-        return Objects.equals(description, myClass.description);
+        MyClass other = (MyClass) o;
+        return description.equalsIgnoreCase(other.description);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(description);
+    }
+
+    @Override
+    public String toString() {
+        return name + " | " + description;
+    }
+
+    @Override
+    public int compareTo(MyClass o) {
+        return description.compareToIgnoreCase(o.description);
     }
 }
