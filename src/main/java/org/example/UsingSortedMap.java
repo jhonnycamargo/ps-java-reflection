@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
