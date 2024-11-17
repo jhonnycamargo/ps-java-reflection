@@ -29,5 +29,7 @@ public class UsingMaps {
                 (x, v) -> System.out.println(x + " | " + v)
         );
 
+        System.out.println("args = " + map.containsKey("3333"));
+
     }
 }
