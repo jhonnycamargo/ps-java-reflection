@@ -13,6 +13,9 @@ public class UsingMaps {
         String s1 = map.get("3333");
         String s2 = map.get("9999");
         String s3 = map.getOrDefault("9999", "xyz");
+        System.out.println("args = " + s1);
+        System.out.println("args = " + s2);
+        System.out.println("args = " + s3);
 
         map.forEach(
                 (x, v) -> System.out.println(x + " | " + v)
