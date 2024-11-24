@@ -8,7 +8,7 @@ public class MakingLogCallsLevels {
     static Logger logger = LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void main(String[] args) {
-        logger.setLevel(Level.INFO);
+        logger.setLevel(Level.FINE);
         logger.log(Level.SEVERE, "Uh Oh!!");
         logger.log(Level.INFO, "Just so you know");
         logger.log(Level.FINE, "Hey developer dude");
