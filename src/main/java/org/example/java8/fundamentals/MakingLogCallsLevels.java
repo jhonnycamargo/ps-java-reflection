@@ -13,8 +13,5 @@ public class MakingLogCallsLevels {
         logger.log(Level.INFO, "Just so you know");
         logger.log(Level.FINE, "Hey developer dude");
         logger.log(Level.FINEST, "You're special");
-        logger.log(Level.FINEST, "cambio1");
-        logger.log(Level.FINEST, "cambio2");
-        logger.log(Level.FINEST, "cambio3");
     }
 }
