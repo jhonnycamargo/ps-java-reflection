@@ -14,6 +14,7 @@ public class LoggerNaming {
         logger.exiting("com.ps.training", "LoggerNaming");
 
         logger.info("We're Logging!");
+        logger.warning("We're Logging!");
 
     }
 }
