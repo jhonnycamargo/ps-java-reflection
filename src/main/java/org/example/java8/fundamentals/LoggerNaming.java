@@ -12,5 +12,11 @@ public class LoggerNaming {
         logger.entering("com.ps.training", "LoggerNaming");
         logger.log(Level.INFO,"We're Logging!");
         logger.exiting("com.ps.training", "LoggerNaming");
+
+        logger.info("We're Logging!");
+        logger.warning("We're Logging!");
+        logger.severe("We're Logging!");
+        logger.fine("We're Logging!");
+
     }
 }
