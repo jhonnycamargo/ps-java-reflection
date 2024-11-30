@@ -16,6 +16,7 @@ public class LoggerNaming {
         logger.info("We're Logging!");
         logger.warning("We're Logging!");
         logger.severe("We're Logging!");
+        logger.fine("We're Logging!");
 
     }
 }
