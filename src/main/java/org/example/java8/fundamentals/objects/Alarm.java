@@ -2,7 +2,7 @@ package org.example.java8.fundamentals.objects;
 
 public class Alarm {
     boolean active;
-    String message;
+    final String message;
 
     Alarm() {
         active = false;
