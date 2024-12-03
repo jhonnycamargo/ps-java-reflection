@@ -10,6 +10,7 @@ public class Alarm {
 
     void turnOff() {
         active = false;
+        message = "Alarm is off";
     }
 
     String getReport() {
