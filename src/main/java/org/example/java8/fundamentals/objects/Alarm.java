@@ -2,7 +2,21 @@ package org.example.java8.fundamentals.objects;
 
 public class Alarm {
     boolean active;
-    String message = "Alarm is active";
+    String message;
+
+    Alarm() {
+        active = false;
+        message = "Alarm is off";
+    }
+
+    Alarm(String message) {
+        this.message = message;
+    }
+
+    Alarm(boolean active, String message) {
+        this.active = active;
+        this.message = message;
+    }
 
     void turnOn() {
         active = true;
@@ -10,22 +24,25 @@ public class Alarm {
 
     void turnOff() {
         active = false;
-        message = "Alarm is off";
     }
 
     String getReport() {
-        return message;
+        return getReport(false);
     }
 
     String getReport(boolean uppercase) {
-        if (uppercase) {
-            return message.toUpperCase();
+        if (active) {
+            if (uppercase) {
+                return message.toUpperCase();
+            } else {
+                return message;
+            }
         } else {
-            return message;
+            return "";
         }
     }
 
     void sendReport() {
-        System.out.println(getReport());
+        System.out.println(getReport(true));
     }
 }
