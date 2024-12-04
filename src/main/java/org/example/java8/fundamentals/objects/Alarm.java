@@ -5,8 +5,7 @@ public class Alarm {
     final String message;
 
     Alarm() {
-        active = false;
-        message = "Alarm is off";
+        this("Some default message");
     }
 
     Alarm(String message) {
