@@ -26,7 +26,10 @@ public class Alarm {
 
     boolean isSnoozing() {
         return snoozeUntil.isAfter(LocalDateTime.now());
+    }
 
+    void stopSnoozing() {
+        snoozeUntil = LocalDateTime.now().minusSeconds(1);
     }
 
     public void turnOn() {
