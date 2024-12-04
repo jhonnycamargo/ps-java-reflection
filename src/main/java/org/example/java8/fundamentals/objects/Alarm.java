@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class Alarm {
     private boolean active;
-    final String message;
-    LocalDateTime snoozeUntil;
+    private final String message;
+    private LocalDateTime snoozeUntil;
 
     Alarm() {
         this("Some default message");
@@ -13,6 +13,7 @@ public class Alarm {
 
     Alarm(String message) {
         this.message = message;
+        stopSnoozing();
     }
 
     Alarm(boolean active, String message) {
@@ -21,7 +22,9 @@ public class Alarm {
     }
 
     void snooze() {
-        snoozeUntil = LocalDateTime.now().plusMinutes(5);
+        if (active) {
+            snoozeUntil = LocalDateTime.now().plusMinutes(5);
+        }
     }
 
     boolean isSnoozing() {
@@ -34,10 +37,12 @@ public class Alarm {
 
     public void turnOn() {
         active = true;
+        stopSnoozing();
     }
 
     void turnOff() {
         active = false;
+        stopSnoozing();
     }
 
     String getReport() {
@@ -45,7 +50,7 @@ public class Alarm {
     }
 
     String getReport(boolean uppercase) {
-        if (active) {
+        if (active && !isSnoozing()) {
             if (uppercase) {
                 return message.toUpperCase();
             } else {
@@ -58,5 +63,13 @@ public class Alarm {
 
     void sendReport() {
         System.out.println(getReport(true));
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Alarm alarm = new Alarm("Temperature too high!");
+        alarm.turnOn();
+        alarm.snooze();
+        Thread.sleep(60000 * 6);
+        alarm.sendReport();
     }
 }
