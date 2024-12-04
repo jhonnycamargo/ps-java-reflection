@@ -13,6 +13,7 @@ public class Alarm {
 
     Alarm(String message) {
         this.message = message;
+        stopSnoozing();
     }
 
     Alarm(boolean active, String message) {
@@ -45,7 +46,7 @@ public class Alarm {
     }
 
     String getReport(boolean uppercase) {
-        if (active) {
+        if (active && !isSnoozing()) {
             if (uppercase) {
                 return message.toUpperCase();
             } else {
