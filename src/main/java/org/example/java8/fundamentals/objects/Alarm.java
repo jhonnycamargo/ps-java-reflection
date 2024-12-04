@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class Alarm {
     private boolean active;
-    final String message;
-    LocalDateTime snoozeUntil;
+    private final String message;
+    private LocalDateTime snoozeUntil;
 
     Alarm() {
         this("Some default message");
