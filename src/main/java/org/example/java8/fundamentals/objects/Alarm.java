@@ -1,12 +1,14 @@
 package org.example.java8.fundamentals.objects;
 
+import java.time.LocalDateTime;
+
 public class Alarm {
-    boolean active;
+    private boolean active;
     final String message;
+    LocalDateTime snoozeUntil;
 
     Alarm() {
-        active = false;
-        message = "Alarm is off";
+        this("Some default message");
     }
 
     Alarm(String message) {
@@ -18,7 +20,19 @@ public class Alarm {
         this.message = message;
     }
 
-    void turnOn() {
+    void snooze() {
+        snoozeUntil = LocalDateTime.now().plusMinutes(5);
+    }
+
+    boolean isSnoozing() {
+        return snoozeUntil.isAfter(LocalDateTime.now());
+    }
+
+    void stopSnoozing() {
+        snoozeUntil = LocalDateTime.now().minusSeconds(1);
+    }
+
+    public void turnOn() {
         active = true;
     }
 
