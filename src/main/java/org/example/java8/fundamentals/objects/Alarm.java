@@ -1,7 +1,7 @@
 package org.example.java8.fundamentals.objects;
 
 public class Alarm {
-    boolean active;
+    private boolean active;
     final String message;
 
     Alarm() {
@@ -17,7 +17,7 @@ public class Alarm {
         this.message = message;
     }
 
-    void turnOn() {
+    public void turnOn() {
         active = true;
     }
 
