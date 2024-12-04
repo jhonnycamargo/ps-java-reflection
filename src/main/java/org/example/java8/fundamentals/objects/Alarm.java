@@ -22,7 +22,9 @@ public class Alarm {
     }
 
     void snooze() {
-        snoozeUntil = LocalDateTime.now().plusMinutes(5);
+        if (active) {
+            snoozeUntil = LocalDateTime.now().plusMinutes(5);
+        }
     }
 
     boolean isSnoozing() {
@@ -35,10 +37,12 @@ public class Alarm {
 
     public void turnOn() {
         active = true;
+        stopSnoozing();
     }
 
     void turnOff() {
         active = false;
+        stopSnoozing();
     }
 
     String getReport() {
@@ -65,7 +69,7 @@ public class Alarm {
         Alarm alarm = new Alarm("Temperature too high!");
         alarm.turnOn();
         alarm.snooze();
-        Thread.sleep(60000*6);
+        Thread.sleep(60000 * 6);
         alarm.sendReport();
     }
 }
