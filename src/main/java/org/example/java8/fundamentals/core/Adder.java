@@ -28,4 +28,14 @@ public class Adder {
         }
     }
 
+    public static void main(String[] args) throws IOException {
+        String[] inFiles = {"./file1.txt", "./file2.txt", "./file3.txt"};
+        String[] outFiles = {"./file1.out.txt", "./file2.out.txt", "./file3.out.txt"};
+
+        for (int i = 0; i < inFiles.length; i++) {
+            Adder adder = new Adder(inFiles[i], outFiles[i]);
+            adder.doAdd();
+        }
+    }
+
 }
