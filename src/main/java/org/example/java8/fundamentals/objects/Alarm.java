@@ -21,6 +21,10 @@ public class Alarm {
         this.message = message;
     }
 
+    public LocalDateTime getSnoozeUntil() {
+        return snoozeUntil;
+    }
+
     public void snooze(int minutes) {
         if (active) {
             snoozeUntil = LocalDateTime.now().plusMinutes(minutes);
