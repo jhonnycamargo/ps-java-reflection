@@ -17,4 +17,10 @@ public class HighVisibilityAlarm extends Alarm {
             return "";
         }
     }
+
+    public static void main(String[] args) {
+        HighVisibilityAlarm alarm = new HighVisibilityAlarm("Temperature too high");
+        alarm.turnOn();
+        alarm.sendReport();
+    }
 }
