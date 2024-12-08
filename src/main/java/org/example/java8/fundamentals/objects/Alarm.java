@@ -3,7 +3,7 @@ package org.example.java8.fundamentals.objects;
 import java.time.LocalDateTime;
 
 public class Alarm {
-    private boolean active;
+    protected boolean active;
     private final String message;
     private LocalDateTime snoozeUntil;
 
@@ -75,5 +75,9 @@ public class Alarm {
         alarm.snooze(5);
         Thread.sleep(60000 * 6);
         alarm.sendReport();
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

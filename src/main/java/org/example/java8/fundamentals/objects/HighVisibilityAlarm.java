@@ -9,9 +9,9 @@ public class HighVisibilityAlarm extends Alarm {
     public String getReport(boolean uppercase) {
         if (active && !isSnoozing()) {
             if (uppercase) {
-                return message.toUpperCase() + "!";
+                return getMessage().toUpperCase() + "!";
             } else {
-                return message + "!";
+                return getMessage() + "!";
             }
         } else {
             return "";
