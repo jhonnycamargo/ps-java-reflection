@@ -5,6 +5,6 @@ public class OOPAlarm {
         Alarm alarm = new Alarm("Temperature too high");
         alarm.turnOn();
         alarm.sendReport();
-        alarm.snooze(20);
+        alarm.snooze(25);
     }
 }
