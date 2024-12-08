@@ -8,23 +8,8 @@ public class PrioritizedAlarm extends Alarm{
         priority = 0;
     }
 
-    public PrioritizedAlarm(int priority) {
-        super();
-        this.priority = priority;
-    }
-
-    public PrioritizedAlarm(String message) {
+    public PrioritizedAlarm(String message, int priority) {
         super(message);
-        priority = 0;
-    }
-
-    public PrioritizedAlarm(boolean active, String message) {
-        super(active, message);
-        priority = 0;
-    }
-
-    public PrioritizedAlarm(boolean active, String message, int priority) {
-        super(active, message);
         this.priority = priority;
     }
 
@@ -32,7 +17,10 @@ public class PrioritizedAlarm extends Alarm{
         return priority;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public static void main(String[] args) {
+        PrioritizedAlarm alarm = new PrioritizedAlarm("Temperature too high!", 42);
+        alarm.turnOn();
+        alarm.snooze(1);
+        System.out.println(alarm.getReport());
     }
 }
