@@ -7,31 +7,35 @@ public class Alarm {
     private final String message;
     private LocalDateTime snoozeUntil;
 
-    Alarm() {
+    public Alarm() {
         this("Some default message");
     }
 
-    Alarm(String message) {
+    public Alarm(String message) {
         this.message = message;
         stopSnoozing();
     }
 
-    Alarm(boolean active, String message) {
+    public Alarm(boolean active, String message) {
         this.active = active;
         this.message = message;
     }
 
-    void snooze() {
+    public LocalDateTime getSnoozeUntil() {
+        return snoozeUntil;
+    }
+
+    public void snooze(int minutes) {
         if (active) {
-            snoozeUntil = LocalDateTime.now().plusMinutes(5);
+            snoozeUntil = LocalDateTime.now().plusMinutes(minutes);
         }
     }
 
-    boolean isSnoozing() {
+    public boolean isSnoozing() {
         return snoozeUntil.isAfter(LocalDateTime.now());
     }
 
-    void stopSnoozing() {
+    private void stopSnoozing() {
         snoozeUntil = LocalDateTime.now().minusSeconds(1);
     }
 
@@ -40,16 +44,16 @@ public class Alarm {
         stopSnoozing();
     }
 
-    void turnOff() {
+    public void turnOff() {
         active = false;
         stopSnoozing();
     }
 
-    String getReport() {
+    public String getReport() {
         return getReport(false);
     }
 
-    String getReport(boolean uppercase) {
+    public String getReport(boolean uppercase) {
         if (active && !isSnoozing()) {
             if (uppercase) {
                 return message.toUpperCase();
@@ -61,14 +65,14 @@ public class Alarm {
         }
     }
 
-    void sendReport() {
+    public void sendReport() {
         System.out.println(getReport(true));
     }
 
     public static void main(String[] args) throws InterruptedException {
         Alarm alarm = new Alarm("Temperature too high!");
         alarm.turnOn();
-        alarm.snooze();
+        alarm.snooze(5);
         Thread.sleep(60000 * 6);
         alarm.sendReport();
     }
