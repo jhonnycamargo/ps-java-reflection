@@ -18,7 +18,7 @@ public class PrioritizedAlarm extends Alarm{
     }
 
     public static void main(String[] args) {
-        PrioritizedAlarm alarm = new PrioritizedAlarm("Temperature too high!", 42);
+        PrioritizedAlarm alarm = new PrioritizedAlarm("Temperature too high", 42);
         alarm.turnOn();
         alarm.snooze(1);
         System.out.println(alarm.getReport());
