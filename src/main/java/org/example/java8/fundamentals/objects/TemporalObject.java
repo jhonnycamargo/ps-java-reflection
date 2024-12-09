@@ -10,5 +10,6 @@ public class TemporalObject {
         HighVisibilityAlarm highVisibilityAlarm = new HighVisibilityAlarm("Temperature too high");
 
         highVisibilityAlarm.turnOn();
+        highVisibilityAlarm.snooze(1);
     }
 }
