@@ -8,5 +8,7 @@ public class TemporalObject {
         System.out.println(alarm.getReport());
 
         HighVisibilityAlarm highVisibilityAlarm = new HighVisibilityAlarm("Temperature too high");
+
+        highVisibilityAlarm.turnOn();
     }
 }
