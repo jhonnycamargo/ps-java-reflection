@@ -2,7 +2,7 @@ package org.example.java8.fundamentals.objects;
 
 import java.time.LocalDateTime;
 
-public class Alarm {
+public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm {
     protected boolean active;
     private final String message;
     private LocalDateTime snoozeUntil;
