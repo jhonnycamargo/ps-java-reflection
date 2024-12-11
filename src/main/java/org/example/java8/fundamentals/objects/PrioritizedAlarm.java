@@ -1,6 +1,6 @@
 package org.example.java8.fundamentals.objects;
 
-public class PrioritizedAlarm extends Alarm{
+public final class PrioritizedAlarm extends Alarm{
     private final int priority;
 
     public PrioritizedAlarm() {

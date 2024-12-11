@@ -1,20 +1,18 @@
 package org.example.java8.fundamentals.objects;
 
-public class HighVisibilityAlarm extends Alarm {
+public final class HighVisibilityAlarm extends Alarm {
 
     public HighVisibilityAlarm(String message) {
         super(message);
     }
 
+    @Override
     public String getReport(boolean uppercase) {
-        if (active && !isSnoozing()) {
-            if (uppercase) {
-                return getMessage().toUpperCase() + "!";
-            } else {
-                return getMessage() + "!";
-            }
+        String report = super.getReport(uppercase);
+        if (report.isEmpty()) {
+            return report;
         } else {
-            return "";
+            return report + "!";
         }
     }
 
