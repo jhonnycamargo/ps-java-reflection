@@ -6,5 +6,6 @@ public class Program {
     public static void main(String[] args) {
         HighVisibilityAlarm alarm = new HighVisibilityAlarm("Pressure low");
         alarm.turnOn();
+        alarm.snooze(1);
     }
 }
