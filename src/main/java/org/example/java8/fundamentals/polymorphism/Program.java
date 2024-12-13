@@ -7,5 +7,6 @@ public class Program {
         HighVisibilityAlarm alarm = new HighVisibilityAlarm("Pressure low");
         alarm.turnOn();
         alarm.snooze(1);
+        System.out.println(alarm.getReport());
     }
 }
