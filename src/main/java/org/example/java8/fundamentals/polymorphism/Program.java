@@ -8,5 +8,7 @@ public class Program {
         alarm.turnOn();
         alarm.snooze(1);
         System.out.println(alarm.getReport());
+
+        alarm.turnOff();
     }
 }
