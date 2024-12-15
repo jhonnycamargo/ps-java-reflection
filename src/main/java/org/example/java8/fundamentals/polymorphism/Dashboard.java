@@ -1,6 +1,8 @@
 package org.example.java8.fundamentals.polymorphism;
 
 import org.example.java8.fundamentals.objects.Alarm;
+import org.example.java8.fundamentals.objects.HighVisibilityAlarm;
+import org.example.java8.fundamentals.objects.PrioritizedAlarm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,5 +19,14 @@ public class Dashboard {
         for (Alarm alarm : allAlarms) {
             System.out.println(alarm.getReport(true));
         }
+    }
+
+    public static void main(String[] args) {
+        Dashboard dashboard = new Dashboard();
+
+        dashboard.add(new PrioritizedAlarm("Temperature too high", 42));
+        dashboard.add(new HighVisibilityAlarm("Pressure low"));
+
+        dashboard.printBigReport();
     }
 }
