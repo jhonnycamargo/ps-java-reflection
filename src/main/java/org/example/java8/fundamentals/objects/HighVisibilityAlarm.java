@@ -1,5 +1,7 @@
 package org.example.java8.fundamentals.objects;
 
+import java.awt.*;
+
 public final class HighVisibilityAlarm extends Alarm {
 
     public HighVisibilityAlarm(String message) {
@@ -14,6 +16,11 @@ public final class HighVisibilityAlarm extends Alarm {
         } else {
             return report + "!";
         }
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.ORANGE;
     }
 
     public static void main(String[] args) {
