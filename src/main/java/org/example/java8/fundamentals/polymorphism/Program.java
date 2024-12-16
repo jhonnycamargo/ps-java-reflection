@@ -8,9 +8,13 @@ import java.util.Arrays;
 
 public class Program {
     public static void main(String[] args) {
-        Alarm alarm = new HighVisibilityAlarm("Your hair is on fire");
+        Alarm alarm = new HighVisibilityAlarm("Temperature too high");
         alarm.turnOn();
-        System.out.println(alarm);
+        if (alarm instanceof PrioritizedAlarm) {
+            PrioritizedAlarm prioritizedAlarm = (PrioritizedAlarm) alarm;
+            System.out.println(prioritizedAlarm.getPriority());
+        }
+
     }
 
     private static void showAlarmStatus(Alarm alarm) {
