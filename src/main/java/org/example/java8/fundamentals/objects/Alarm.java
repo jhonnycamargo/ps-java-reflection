@@ -80,4 +80,9 @@ public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSen
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public String toString() {
+        return getReport();
+    }
 }

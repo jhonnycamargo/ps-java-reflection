@@ -4,17 +4,13 @@ import org.example.java8.fundamentals.objects.Alarm;
 import org.example.java8.fundamentals.objects.HighVisibilityAlarm;
 import org.example.java8.fundamentals.objects.PrioritizedAlarm;
 
+import java.util.Arrays;
+
 public class Program {
     public static void main(String[] args) {
-        HighVisibilityAlarm alarm = new HighVisibilityAlarm("Pressure low");
+        Alarm alarm = new HighVisibilityAlarm("Your hair is on fire");
         alarm.turnOn();
-        String report = alarm.getReport();
-        System.out.println(report);
-
-        Alarm alarm2 = new PrioritizedAlarm("Pressure low", 1);
-
-        PrioritizedAlarm myAlarm = new PrioritizedAlarm("Pressure low", 1);
-        showAlarmStatus(myAlarm);
+        System.out.println(alarm);
     }
 
     private static void showAlarmStatus(Alarm alarm) {
