@@ -1,11 +1,18 @@
 package org.example.java8.fundamentals.objects;
 
+import java.awt.*;
+
 public final class PrioritizedAlarm extends Alarm{
     private final int priority;
 
     public PrioritizedAlarm() {
         super();
         priority = 0;
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.GREEN;
     }
 
     public PrioritizedAlarm(String message, int priority) {

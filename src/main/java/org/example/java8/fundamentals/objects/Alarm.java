@@ -1,8 +1,9 @@
 package org.example.java8.fundamentals.objects;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 
-public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm {
+public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSensitiveAlarm {
     protected boolean active;
     private final String message;
     private LocalDateTime snoozeUntil;
@@ -19,6 +20,10 @@ public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm {
     public Alarm(boolean active, String message) {
         this.active = active;
         this.message = message;
+    }
+
+    public Color getColor() {
+        return null;
     }
 
     public LocalDateTime getSnoozeUntil() {
@@ -79,5 +84,10 @@ public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm {
 
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public String toString() {
+        return getReport();
     }
 }
