@@ -2,8 +2,9 @@ package org.example.java8.fundamentals.objects;
 
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
-public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSensitiveAlarm {
+public sealed abstract class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSensitiveAlarm {
     protected boolean active;
     private final String message;
     private LocalDateTime snoozeUntil;
@@ -22,9 +23,7 @@ public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSen
         this.message = message;
     }
 
-    public Color getColor() {
-        return null;
-    }
+    public abstract Color getColor();
 
     public LocalDateTime getSnoozeUntil() {
         return snoozeUntil;
@@ -75,7 +74,8 @@ public sealed class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSen
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Alarm alarm = new Alarm("Temperature too high!");
+        Alarm alarm = new HighVisibilityAlarm("Temperature too high");
+        System.out.println(alarm.getColor());
         alarm.turnOn();
         alarm.snooze(5);
         Thread.sleep(60000 * 6);
