@@ -74,11 +74,11 @@ public sealed abstract class Alarm permits HighVisibilityAlarm, PrioritizedAlarm
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Alarm alarm = new HighVisibilityAlarm("Temperature too high");
+        Alarm alarm = new PrioritizedAlarm("Temperature too high", 42);
         System.out.println(alarm.getColor());
         alarm.turnOn();
         alarm.snooze(5);
-        Thread.sleep(60000 * 6);
+        Thread.sleep(6 * 6);
         alarm.sendReport();
     }
 
