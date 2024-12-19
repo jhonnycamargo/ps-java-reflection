@@ -29,6 +29,9 @@ public class Program {
     }
 
     public static void main(String[] args) {
-
+        HighVisibilityAlarm alarm = new HighVisibilityAlarm("Temperature too high");
+        activate(alarm);
+        printHelpText(alarm);
+        saveItTwice(alarm);
     }
 }
