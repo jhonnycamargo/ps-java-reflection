@@ -27,4 +27,8 @@ public class Program {
     private static void showAlarmStatus(Alarm alarm) {
         System.out.println("Is Snoozing: " + alarm.isSnoozing());
     }
+
+    public static void main(String[] args) {
+
+    }
 }
