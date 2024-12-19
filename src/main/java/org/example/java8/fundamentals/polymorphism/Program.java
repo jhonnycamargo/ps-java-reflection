@@ -28,8 +28,4 @@ public class Program {
         System.out.println("Is Snoozing: " + alarm.isSnoozing());
     }
 
-    public static void main(String[] args) {
-        HighVisibilityAlarm alarm = new HighVisibilityAlarm("Temperature too high");
-        activate(alarm);
-    }
 }
