@@ -2,19 +2,26 @@ package org.example.java8.fundamentals.polymorphism;
 
 import org.example.java8.fundamentals.objects.Alarm;
 import org.example.java8.fundamentals.objects.HighVisibilityAlarm;
-import org.example.java8.fundamentals.objects.PrioritizedAlarm;
-
-import java.util.Arrays;
 
 public class Program {
     public static void main(String[] args) {
-        Alarm alarm = new HighVisibilityAlarm("Temperature too high");
-        alarm.turnOn();
-        if (alarm instanceof PrioritizedAlarm) {
-            PrioritizedAlarm prioritizedAlarm = (PrioritizedAlarm) alarm;
-            System.out.println(prioritizedAlarm.getPriority());
-        }
+        HighVisibilityAlarm alarm = new HighVisibilityAlarm("Temperature too high");
+        activate(alarm);
+        printHelpText(alarm);
+        saveItTwice(alarm);
+    }
 
+    private static void saveItTwice(PersistentObject persistentObject) {
+        persistentObject.save();
+        persistentObject.save();
+    }
+
+    private static void printHelpText(Widget widget) {
+        System.out.println(widget.getHelpText());
+    }
+
+    private static void activate(Alarm alarm) {
+        alarm.turnOn();
     }
 
     private static void showAlarmStatus(Alarm alarm) {

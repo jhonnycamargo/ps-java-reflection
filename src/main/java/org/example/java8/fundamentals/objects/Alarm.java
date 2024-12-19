@@ -1,10 +1,13 @@
 package org.example.java8.fundamentals.objects;
 
+import org.example.java8.fundamentals.polymorphism.PersistentObject;
+import org.example.java8.fundamentals.polymorphism.Widget;
+
 import java.awt.*;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
-public sealed abstract class Alarm permits HighVisibilityAlarm, PrioritizedAlarm, TimeSensitiveAlarm {
+public abstract class Alarm
+        implements Widget, PersistentObject {
     protected boolean active;
     private final String message;
     private LocalDateTime snoozeUntil;
@@ -89,5 +92,15 @@ public sealed abstract class Alarm permits HighVisibilityAlarm, PrioritizedAlarm
     @Override
     public String toString() {
         return getReport();
+    }
+
+    @Override
+    public void save() {
+        System.out.println("Saving alarm: " + this);
+    }
+
+    @Override
+    public String getHelpText() {
+        return "An alarm that can be turned on and off, snoozed, and sent a report.";
     }
 }
