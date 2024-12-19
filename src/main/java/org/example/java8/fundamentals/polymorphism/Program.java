@@ -32,6 +32,5 @@ public class Program {
         HighVisibilityAlarm alarm = new HighVisibilityAlarm("Temperature too high");
         activate(alarm);
         printHelpText(alarm);
-        saveItTwice(alarm);
     }
 }
