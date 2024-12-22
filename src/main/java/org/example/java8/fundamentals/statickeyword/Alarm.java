@@ -1,7 +1,7 @@
 package org.example.java8.fundamentals.statickeyword;
 
 public class Alarm {
-    private static String documentation = "Use turnOn() to activate.";
+    public static String documentation = "Use turnOn() to activate.";
 
     protected boolean active;
 
@@ -11,5 +11,10 @@ public class Alarm {
 
     public void turnOn() {
         active = true;
+    }
+
+    public static void main(String[] args) {
+        String s = Alarm.getDocumentation();
+        Alarm.documentation = "....";
     }
 }
