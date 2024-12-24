@@ -22,6 +22,7 @@ public class Alarm {
 
         Alarm alarm = new Alarm();
         alarm.turnOn();
+        System.out.println(alarm.active);
 
     }
 }
