@@ -20,5 +20,7 @@ public class Alarm {
         System.out.println(s);
         System.out.println("args = " + Arrays.toString(args));
 
+        Alarm alarm = new Alarm();
+
     }
 }
