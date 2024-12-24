@@ -21,6 +21,7 @@ public class Alarm {
         System.out.println("args = " + Arrays.toString(args));
 
         Alarm alarm = new Alarm();
+        alarm.turnOn();
 
     }
 }
