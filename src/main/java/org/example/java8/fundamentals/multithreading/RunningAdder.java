@@ -2,6 +2,7 @@ package org.example.java8.fundamentals.multithreading;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class RunningAdder {
 
@@ -13,12 +14,10 @@ public class RunningAdder {
             ExecutorService es = Executors.newFixedThreadPool(3);
             for (int i = 0; i < inFiles.length; i++) {
                 Adder adder = new Adder(inFiles[i], outFiles[i]);
-                threads[i] = new Thread(adder);
-                threads[i].start();
+                es.submit(adder);
             }
-            for (Thread thread : threads) {
-                thread.join();;
-            }
+            es.shutdown();
+            es.awaitTermination(60, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
