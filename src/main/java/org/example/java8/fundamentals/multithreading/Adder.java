@@ -14,7 +14,7 @@ public class Adder implements Runnable {
         this.outFile = outFile;
     }
 
-    public void doAdd() throws IOException {
+    public int doAdd() throws IOException {
         int total = 0;
         String line = null;
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(inFile))) {
@@ -25,6 +25,8 @@ public class Adder implements Runnable {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(outFile))) {
             writer.write("Total: " + total);
         }
+
+        return total;
     }
 
     @Override
