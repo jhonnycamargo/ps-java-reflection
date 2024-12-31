@@ -42,5 +42,6 @@ public class Main {
         int modifiers = nameField.getModifiers();
         //boolean isPublic = modifiers & 0x00000001;
         boolean isPublic = Modifier.isPublic(modifiers);
+        System.out
     }
 }
