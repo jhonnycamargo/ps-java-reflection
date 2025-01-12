@@ -5,7 +5,6 @@ public class TemporalObject {
 
         TemporalObject temporalObject = new TemporalObject();
         
-        temporalObject.printCurrentTime();
 
     }
 }
