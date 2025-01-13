@@ -2,8 +2,8 @@ package org.example.java8.fundamentals.statickeyword;
 
 public class Example {
 
-    {
-        System.out.println("Example Initializer");
+    static {
+        System.out.println("Example static Initializer");
     }
 
     public Example() {
