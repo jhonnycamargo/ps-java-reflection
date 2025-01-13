@@ -4,7 +4,7 @@ public class TemporalObject {
     public static void main(String[] args) {
 
         TemporalObject temporalObject = new TemporalObject();
-        
+
 
     }
 }
