@@ -7,6 +7,5 @@ public class Program {
         double d1 = PI;
         double d2 = PI;
         double d3 = PI;
-        double d4 = PI;
     }
 }
