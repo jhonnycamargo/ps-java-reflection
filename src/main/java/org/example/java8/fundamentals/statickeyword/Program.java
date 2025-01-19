@@ -5,6 +5,5 @@ import static java.lang.Math.PI;
 public class Program {
     public static void main(String[] args) {
         double d1 = PI;
-        double d2 = PI;
     }
 }
