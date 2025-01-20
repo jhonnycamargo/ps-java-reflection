@@ -13,6 +13,7 @@ public class Worker implements Runnable {
             int startBalance = account.getBalance();
             account.deposit(10);
             int endBalance = account.getBalance();
+            System.out.println("End Balance: " + endBalance + " StartBalance: " + startBalance);
         }
     }
 }
