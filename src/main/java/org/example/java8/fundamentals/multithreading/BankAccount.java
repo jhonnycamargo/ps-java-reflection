@@ -10,7 +10,11 @@ public class BankAccount {
         return balance;
     }
 
-    public void deposit(int amount) {
+    public synchronized void deposit(int amount) {
         balance += amount;
+    }
+
+    public synchronized void withdraw(int amount) {
+        balance -= amount;
     }
 }
