@@ -11,7 +11,10 @@ public class Worker implements Runnable {
     public void run() {
         for (int i = 0; i < 10; i++) {
             int startBalance = account.getBalance();
-            account.deposit(10);
+            synchronized (account) {
+                account.deposit(10);
+            }
+
             int endBalance = account.getBalance();
             System.out.println("End Balance: " + endBalance + " StartBalance: " + startBalance);
         }
