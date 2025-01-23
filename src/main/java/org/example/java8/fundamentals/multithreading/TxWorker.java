@@ -15,7 +15,9 @@ public class TxWorker implements Runnable {
     @Override
     public void run() {
         if (txType == 'w') {
-
+            account.withdraw(amt);
+        } else if (txType == 'd') {
+            account.deposit(amt);
         }
     }
 }
