@@ -6,7 +6,5 @@ public class Program {
     public static void main(String[] args) {
         double d1 = PI;
         double d2 = Math.PI;
-        System.out.println(d1);
-        System.out.println(d2);
     }
 }
