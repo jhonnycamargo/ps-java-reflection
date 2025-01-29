@@ -1,5 +1,6 @@
 package org.example.java8.fundamentals.reflection;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class BankAccountRunner {
@@ -56,4 +57,22 @@ public class BankAccountRunner {
             System.out.println("method check - public");
         }
     }
+
+    void fieldInfo(Object obj) {
+        Class<?> theClass = obj.getClass();
+        Field[] fields = theClass.getFields();
+
+        Field[] declaredFields = theClass.getDeclaredFields();
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
