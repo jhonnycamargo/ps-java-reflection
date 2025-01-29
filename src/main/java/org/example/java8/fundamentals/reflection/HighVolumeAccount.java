@@ -1,6 +1,6 @@
 package org.example.java8.fundamentals.reflection;
 
-public class HighVolumeAccount extends BankAccount {
+public final class HighVolumeAccount extends BankAccount {
 
     public HighVolumeAccount(String id) {
         super(id);
