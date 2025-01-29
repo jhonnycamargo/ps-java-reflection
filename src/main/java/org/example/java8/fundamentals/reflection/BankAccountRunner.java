@@ -1,5 +1,7 @@
 package org.example.java8.fundamentals.reflection;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 public class BankAccountRunner {
@@ -56,4 +58,73 @@ public class BankAccountRunner {
             System.out.println("method check - public");
         }
     }
+
+    void fieldInfo(Object obj) {
+        Class<?> theClass = obj.getClass();
+        Field[] fields = theClass.getFields();
+        displayFields(fields);
+
+        Field[] declaredFields = theClass.getDeclaredFields();
+        displayFields(declaredFields);
+    }
+
+    private void displayFields(Field[] fields) {
+        for (Field field : fields) {
+            System.out.println("Field name: " + field.getName());
+            System.out.println("Field type: " + field.getType().getSimpleName());
+            int modifiers = field.getModifiers();
+            System.out.println("Field modifiers: " + modifiers);
+            System.out.println("Field is public: " + Modifier.isPublic(modifiers));
+            System.out.println("Field is protected: " + Modifier.isProtected(modifiers));
+            System.out.println("Field is private: " + Modifier.isPrivate(modifiers));
+            System.out.println("Field is static: " + Modifier.isStatic(modifiers));
+            System.out.println("Field is final: " + Modifier.isFinal(modifiers));
+            System.out.println("Field is transient: " + Modifier.isTransient(modifiers));
+            System.out.println("Field is volatile: " + Modifier.isVolatile(modifiers));
+            System.out.println();
+        }
+    }
+
+    void methodInfo(Object obj) {
+        Class<?> theClass = obj.getClass();
+        var methods = theClass.getMethods();
+        displayMethods(methods);
+
+        var declaredMethods = theClass.getDeclaredMethods();
+        displayMethods(declaredMethods);
+    }
+
+    private void displayMethods(Method[] methods) {
+        for (Method m : methods) {
+            System.out.println("Method name: " + m.getName());
+            System.out.println("Method return type: " + m.getReturnType().getSimpleName());
+            System.out.println("Method is public: " + Modifier.isPublic(m.getModifiers()));
+            System.out.println("Method is protected: " + Modifier.isProtected(m.getModifiers()));
+            System.out.println("Method is private: " + Modifier.isPrivate(m.getModifiers()));
+            System.out.println("Method is static: " + Modifier.isStatic(m.getModifiers()));
+            System.out.println("Method is final: " + Modifier.isFinal(m.getModifiers()));
+            System.out.println("Method is synchronized: " + Modifier.isSynchronized(m.getModifiers()));
+            System.out.println("Method is abstract: " + Modifier.isAbstract(m.getModifiers()));
+            System.out.println("Method is native: " + Modifier.isNative(m.getModifiers()));
+            System.out.println("Method is strict: " + Modifier.isStrict(m.getModifiers()));
+            System.out.println();
+        }
+    }
+
+    void methodInfo2(Object obj) {
+        Class<?> theClass = obj.getClass();
+        Method[] methods = theClass.getMethods();
+        for (Method m : methods) {
+            if (m.getDeclaringClass() != Object.class) {
+                System.out.println("Method name: " + m.getName());
+                System.out.println("Method return type: " + m.getReturnType().getSimpleName());
+                Class<?>[] paramTypes = m.getParameterTypes();
+                for (Class<?> paramType : paramTypes) {
+                    System.out.println("Parameter type: " + paramType.getSimpleName());
+                }
+                System.out.println();
+            }
+        }
+    }
+
 }
