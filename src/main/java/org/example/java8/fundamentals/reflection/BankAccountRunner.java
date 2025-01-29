@@ -111,5 +111,20 @@ public class BankAccountRunner {
         }
     }
 
+    void methodInfo2(Object obj) {
+        Class<?> theClass = obj.getClass();
+        Method[] methods = theClass.getMethods();
+        for (Method m : methods) {
+            if (m.getDeclaringClass() != Object.class) {
+                System.out.println("Method name: " + m.getName());
+                System.out.println("Method return type: " + m.getReturnType().getSimpleName());
+                Class<?>[] paramTypes = m.getParameterTypes();
+                for (Class<?> paramType : paramTypes) {
+                    System.out.println("Parameter type: " + paramType.getSimpleName());
+                }
+                System.out.println();
+            }
+        }
+    }
 
 }
