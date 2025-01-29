@@ -21,4 +21,17 @@ public class BankAccountRunner {
         Class<?> theClass = obj.getClass();
         showName(theClass);
     }
+
+    void classInfo(Object obj) {
+        Class<?> theClass = obj.getClass();
+        System.out.println("Class name: " + theClass.getSimpleName());
+
+        Class<?> superClass = theClass.getSuperclass();
+        System.out.println("Super class: " + superClass.getSimpleName());
+
+        Class<?>[] interfaces = theClass.getInterfaces();
+        for (Class<?> i : interfaces) {
+            System.out.println("Interface: " + i.getSimpleName());
+        }
+    }
 }
