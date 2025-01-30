@@ -1,6 +1,7 @@
 package org.example.java8.fundamentals.reflection;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
@@ -126,5 +127,13 @@ public class BankAccountRunner {
             }
         }
     }
+
+    void callGetId(Object obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<?> theClass = obj.getClass();
+        Method m = theClass.getDeclaredMethod("getId");
+        Object result = m.invoke(obj);
+
+    }
+
 
 }
