@@ -127,8 +127,9 @@ public class BankAccountRunner {
         }
     }
 
-    void callGetId(Object obj) {
+    void callGetId(Object obj) throws NoSuchMethodException {
         Class<?> theClass = obj.getClass();
+        Method m = theClass.getDeclaredMethod("getId");
 
     }
 
