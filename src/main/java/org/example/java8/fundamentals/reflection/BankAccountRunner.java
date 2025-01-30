@@ -127,4 +127,10 @@ public class BankAccountRunner {
         }
     }
 
+    void callGetId(Object obj) {
+        Class<?> theClass
+
+    }
+
+
 }
