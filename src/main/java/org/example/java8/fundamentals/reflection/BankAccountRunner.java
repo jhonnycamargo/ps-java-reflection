@@ -128,7 +128,7 @@ public class BankAccountRunner {
     }
 
     void callGetId(Object obj) {
-        Class<?> theClass
+        Class<?> theClass = obj.getClass();
 
     }
 
