@@ -1,9 +1,6 @@
 package org.example.java8.fundamentals.reflection;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 public class BankAccountRunner {
 
@@ -145,7 +142,16 @@ public class BankAccountRunner {
     }
 
     void startWork(String workerTypeName, Object workerTarget) {
-
+        try {
+            Class<?> workerType = Class.forName(workerTypeName);
+            Class<?> targetType = workerTarget.getClass();
+            Constructor c = workerType.getConstructor(targetType);
+            Object worker = c.newInstance(workerTarget);
+            Method m = workerType.getMethod("doWork");
+            m.invoke(worker);
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+                | InvocationTargetException e) {
+            e.printStackTrace();
     }
 
 }
