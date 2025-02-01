@@ -1,6 +1,6 @@
 package org.example.java8.fundamentals.reflection;
 
-public final class HighVolumeAccount extends BankAccount {
+public final class HighVolumeAccount extends BankAccount implements Runnable {
 
     public HighVolumeAccount(String id) {
         super(id);
@@ -18,7 +18,7 @@ public final class HighVolumeAccount extends BankAccount {
         return new int[] {5, 5, 5, 5, 5};
     }
 
-    public String run() {
+    public void run() {
         for (int depositAmt : readDailyDeposits()) {
             deposit(depositAmt);
         }
@@ -26,7 +26,5 @@ public final class HighVolumeAccount extends BankAccount {
         for (int withdrawalAmt : readDailyWithdrawals()) {
             withdraw(withdrawalAmt);
         }
-
-        return "High volume account processed";
     }
 }

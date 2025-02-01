@@ -1,9 +1,6 @@
 package org.example.java8.fundamentals.reflection;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 public class BankAccountRunner {
 
@@ -16,6 +13,9 @@ public class BankAccountRunner {
         bankAccountRunner.showName(c);
 
         bankAccountRunner.showName(BankAccount.class);
+
+        BankAccount acct1 = new BankAccount("1234");
+        bankAccountRunner.startWork("org.example.java8.fundamentals.reflection.AccountWorker", acct1);
     }
 
     void showName(Class<?> theClass) {
@@ -132,8 +132,27 @@ public class BankAccountRunner {
         Class<?> theClass = obj.getClass();
         Method m = theClass.getDeclaredMethod("getId");
         Object result = m.invoke(obj);
-
+        System.out.println("Result: " + result);
     }
 
+    void callDeposit(Object obj, int amt) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<?> theClass = obj.getClass();
+        Method m = theClass.getMethod("deposit", int.class);
+        m.invoke(obj, amt);
+    }
+
+    void startWork(String workerTypeName, Object workerTarget) {
+        try {
+            Class<?> workerType = Class.forName(workerTypeName);
+            Class<?> targetType = workerTarget.getClass();
+            Constructor c = workerType.getConstructor(targetType);
+            Object worker = c.newInstance(workerTarget);
+            Method doWork = workerType.getMethod("doWork");
+            doWork.invoke(worker);
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+                 | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
