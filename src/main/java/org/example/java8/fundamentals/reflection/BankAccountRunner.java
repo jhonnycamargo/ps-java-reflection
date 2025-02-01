@@ -16,6 +16,9 @@ public class BankAccountRunner {
         bankAccountRunner.showName(c);
 
         bankAccountRunner.showName(BankAccount.class);
+
+        BankAccount acct1 = new BankAccount("1234");
+        bankAccountRunner.startWork("org.example.java8.fundamentals.reflection.AccountWorker", acct1);
     }
 
     void showName(Class<?> theClass) {
@@ -141,5 +144,8 @@ public class BankAccountRunner {
         m.invoke(obj, amt);
     }
 
+    void startWork(String workerTypeName, Object workerTarget) {
+
+    }
 
 }
