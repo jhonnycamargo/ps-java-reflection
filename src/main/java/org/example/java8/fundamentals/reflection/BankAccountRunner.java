@@ -132,7 +132,13 @@ public class BankAccountRunner {
         Class<?> theClass = obj.getClass();
         Method m = theClass.getDeclaredMethod("getId");
         Object result = m.invoke(obj);
+        System.out.println("Result: " + result);
+    }
 
+    void callDeposit(Object obj, int amt) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<?> theClass = obj.getClass();
+        Method m = theClass.getMethod("deposit", int.class);
+        m.invoke(obj, amt);
     }
 
 
