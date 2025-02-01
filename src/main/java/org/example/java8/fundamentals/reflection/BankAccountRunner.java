@@ -147,11 +147,12 @@ public class BankAccountRunner {
             Class<?> targetType = workerTarget.getClass();
             Constructor c = workerType.getConstructor(targetType);
             Object worker = c.newInstance(workerTarget);
-            Method m = workerType.getMethod("doWork");
-            m.invoke(worker);
+            Method doWork = workerType.getMethod("doWork");
+            doWork.invoke(worker);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-                | InvocationTargetException e) {
+                 | InvocationTargetException e) {
             e.printStackTrace();
+        }
     }
 
 }
