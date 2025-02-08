@@ -1,6 +1,6 @@
 package org.example.java8.fundamentals.reflection;
 
-public class AccountWorker implements Runnable {
+public class AccountWorker implements Runnable, TaskWorker {
     BankAccount ba;
     HighVolumeAccount hva;
 
