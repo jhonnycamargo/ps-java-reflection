@@ -24,4 +24,8 @@ public class BankAccount {
     public synchronized void withdraw(int amount) {
         balance -= amount;
     }
+
+    public String toStrong() {
+        return "BankAccount{id='" + id + "', balance=" + balance + "}";
+    }
 }
