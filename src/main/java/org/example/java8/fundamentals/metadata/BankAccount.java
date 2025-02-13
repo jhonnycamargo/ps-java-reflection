@@ -25,7 +25,8 @@ public class BankAccount {
         balance -= amount;
     }
 
-    public String toStrong() {
+    @Override
+    public String toString() {
         return "BankAccount{id='" + id + "', balance=" + balance + "}";
     }
 }
