@@ -2,6 +2,7 @@ package org.example.java8.fundamentals.metadata;
 
 import org.example.java8.fundamentals.reflection.TaskWorker;
 
+@WorkHandler(useThreadPool = false)
 public class AccountWorker implements Runnable, TaskWorker {
 
     BankAccount ba;
