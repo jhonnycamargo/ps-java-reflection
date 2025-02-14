@@ -8,7 +8,19 @@ public class AccessingAnnotations {
         Class<?> workerType = Class.forName(workerTypeName);
         TaskWorker worker = (TaskWorker) workerType.newInstance();
         worker.setTarget(workerTarget);
+        WorkHandler wh = workerType.getAnnotation(WorkHandler.class);
+        if (wh == null) {
+            throw new RuntimeException("No WorkHandler annotation found on class " + workerTypeName);
+        }
 
-        worker.doWork();
+        if (wh.useThreadPool()) {
+            pool.submit(new Runnable() {
+                public void run() {
+                    worker.doWork();
+                }
+            });
+        } else {
+            worker.doWork();
+        }
     }
 }
