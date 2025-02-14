@@ -2,7 +2,12 @@ package org.example.java8.fundamentals.metadata;
 
 import org.example.java8.fundamentals.reflection.TaskWorker;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class AccessingAnnotations {
+
+    ExecutorService pool = Executors.newFixedThreadPool(5);
 
     void startWork(String workerTypeName, Object workerTarget) throws Exception {
         Class<?> workerType = Class.forName(workerTypeName);
