@@ -9,4 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface WorkHandler {
     boolean useThreadPool() default false;
+    boolean var();
+    boolean var2() default true;
+    boolean var3() default false;
 }
