@@ -1,5 +1,6 @@
 package org.example.java8.fundamentals.metadata;
 
+@ProcessedBy(AccountWorker.class)
 public class BankAccount {
     private final String id;
     private int balance = 0;
