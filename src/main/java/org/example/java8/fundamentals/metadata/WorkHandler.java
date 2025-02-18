@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 public @interface WorkHandler {
     boolean useThreadPool() default false;
     boolean var();
-    boolean var2() default true;
+
 
 }
