@@ -28,4 +28,11 @@ public class AccessingAnnotations {
             worker.doWork();
         }
     }
+
+    public static void main(String[] args) throws Exception {
+        AccessingAnnotations aa = new AccessingAnnotations();
+        aa.startWork("org.example.java8.fundamentals.metadata.AccountWorker", new BankAccount("1234", 500));
+
+        aa.startWorkSelfContained(new BankAccount("1234", 500));
+    }
 }
