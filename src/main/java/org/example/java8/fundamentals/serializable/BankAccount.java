@@ -34,10 +34,19 @@ public class BankAccount {
             e.printStackTrace();
 
         }
-
     }
 
     private void deposit(int i) {
         balance += i;
+    }
+
+    BankAccount loadAccount(String fileName) {
+        BankAccount ba = null;
+        try {
+            ba = (BankAccount) Files.newInputStream(Paths.get(fileName));
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ba;
     }
 }
