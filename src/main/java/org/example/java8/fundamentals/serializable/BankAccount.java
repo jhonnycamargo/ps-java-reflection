@@ -1,5 +1,6 @@
 package org.example.java8.fundamentals.serializable;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,7 +28,12 @@ public class BankAccount {
     }
 
     private static void saveAccount(BankAccount ba, String fileName) {
-        new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)));
+        try (ObjectOutputStream os = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
+            os.writeObject(ba);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
 
     }
 
