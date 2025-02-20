@@ -1,6 +1,7 @@
 package org.example.java8.fundamentals.serializable;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,10 +43,12 @@ public class BankAccount {
 
     BankAccount loadAccount(String fileName) {
         BankAccount ba = null;
-        try {
-            ba = (BankAccount) Files.newInputStream(Paths.get(fileName));
-        } catch (IOException | ClassNotFoundException e) {
+        try (ObjectInputStream is = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))) {
+            ba = (BankAccount) is.readObject();
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return ba;
     }
