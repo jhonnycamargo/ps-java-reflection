@@ -1,5 +1,10 @@
 package org.example.java8.fundamentals.serializable;
 
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class BankAccount {
 
     private final String id;
@@ -22,6 +27,7 @@ public class BankAccount {
     }
 
     private static void saveAccount(BankAccount ba, String fileName) {
+        new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)));
 
     }
 
