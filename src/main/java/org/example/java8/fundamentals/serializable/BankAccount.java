@@ -13,4 +13,9 @@ public class BankAccount {
         this.id = id;
         this.balance = startBalance;
     }
+
+    public static void main(String[] args) {
+        BankAccount acct1 = new BankAccount("1234", 500);
+        System.out.println(acct1);
+    }
 }
