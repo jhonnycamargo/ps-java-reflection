@@ -35,4 +35,26 @@ public class AccessingAnnotations {
 
         aa.startWorkSelfContained(new BankAccount("1234", 500));
     }
+
+    private void startWorkSelfContained(Object workerTarget) throws InstantiationException, IllegalAccessException {
+        Class<?> targetType = workerTarget.getClass();
+        ProcessedBy pb = targetType.getAnnotation(ProcessedBy.class);
+        Class<?> workerType = pb.value();
+        TaskWorker worker = (TaskWorker) workerType.newInstance();
+        worker.setTarget(workerTarget);
+        WorkHandler wh = workerType.getAnnotation(WorkHandler.class);
+        if (wh == null) {
+            throw new RuntimeException("No WorkHandler annotation found on class ");
+        }
+
+        if (wh.useThreadPool()) {
+            pool.submit(new Runnable() {
+                public void run() {
+                    worker.doWork();
+                }
+            });
+        } else {
+            worker.doWork();
+        }
+    }
 }
