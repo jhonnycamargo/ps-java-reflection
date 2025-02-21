@@ -3,11 +3,12 @@ package org.example.java8.fundamentals.serializable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class BankAccount {
+public class BankAccount implements Serializable {
 
     private final String id;
     private int balance = 0;
@@ -26,6 +27,9 @@ public class BankAccount {
         acct1.deposit(100);
         System.out.println(acct1);
         saveAccount(acct1, "account.dat");
+
+        BankAccount acct2 = acct1.loadAccount("account.dat");
+        System.out.println(acct2.id + " : " + acct2.balance);
     }
 
     private static void saveAccount(BankAccount ba, String fileName) {
