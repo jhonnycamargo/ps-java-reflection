@@ -41,8 +41,12 @@ public class BankAccount implements Serializable {
         }
     }
 
-    private void deposit(int i) {
+    public synchronized void deposit(int i) {
         balance += i;
+    }
+
+    public synchronized void withdraw(int i) {
+        balance -= i;
     }
 
     BankAccount loadAccount(String fileName) {
