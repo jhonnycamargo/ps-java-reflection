@@ -28,7 +28,7 @@ public class BankAccount implements Serializable {
         BankAccount acct1 = new BankAccount("1234", 500);
         acct1.deposit(250);
         System.out.println(acct1.id + " : " + acct1.balance);
-        saveAccount(acct1, "account.dat");
+//        saveAccount(acct1, "account.dat");
 
         BankAccount acct2 = acct1.loadAccount("account.dat");
         System.out.println(acct2.id + " : " + acct2.balance);
@@ -43,8 +43,10 @@ public class BankAccount implements Serializable {
         }
     }
 
-    public synchronized void deposit(int i) {
-        balance += i;
+    public synchronized void deposit(int amount) {
+        balance += amount;
+        lastTxType = 'd';
+        lastTxAmount = amount;
     }
 
     public synchronized void withdraw(int i) {
