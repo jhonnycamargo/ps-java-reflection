@@ -38,8 +38,7 @@ public class BankAccount implements Serializable {
         try (ObjectOutputStream os = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) {
             os.writeObject(ba);
         } catch (IOException e) {
-            e.printStackTrace();
-
+            throw new RuntimeException(e);
         }
     }
 
@@ -58,7 +57,7 @@ public class BankAccount implements Serializable {
         try (ObjectInputStream is = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))) {
             ba = (BankAccount) is.readObject();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
