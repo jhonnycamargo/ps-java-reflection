@@ -2,7 +2,6 @@ package org.example.java8.fundamentals.serializable;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class BankAccount implements Serializable {
@@ -86,6 +85,10 @@ public class BankAccount implements Serializable {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public String getId() {
+        return id;
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
