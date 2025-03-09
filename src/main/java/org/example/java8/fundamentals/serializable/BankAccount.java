@@ -1,16 +1,15 @@
 package org.example.java8.fundamentals.serializable;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class BankAccount implements Serializable {
 
-    private final String id;
+    @Serial
+    private static final long serialVersionUID = 8510002312768815296L;
+
+    private String id;
     private int balance = 0;
     private char lastTxType;
     private int lastTxAmount;
@@ -86,5 +85,24 @@ public class BankAccount implements Serializable {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        /*out.writeInt(balance);
+        out.writeChar(lastTxType);
+        out.writeInt(lastTxAmount);*/
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        ObjectInputStream.GetField fields = in.readFields();
+        id = (String) fields.get("id", null);
+        balance = fields.get("balance", 0);
+        lastTxType = fields.get("lastTxType", 'u');
+        lastTxAmount = fields.get("lastTxAmount", -1);
     }
 }
